@@ -110,7 +110,7 @@ h2{
 }
 .information{
     white-space: pre-wrap;
-    background: -webkit-linear-gradient(#3b024d, #00091d);
+    background: -webkit-linear-gradient(#fbff00, #ffc38b);
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 18px;
