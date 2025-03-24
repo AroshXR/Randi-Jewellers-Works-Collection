@@ -68,6 +68,7 @@ h2{
     background-clip: text;
     -webkit-text-fill-color: transparent;
     justify-content: center;
+    font-size: 30px;
 }
 #overview{
     background: -webkit-linear-gradient(#0e0d0d, #00c3ff);
