@@ -84,11 +84,11 @@ h2{
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
-#info{
-    background: -webkit-linear-gradient(#0e0d0d, #0b016d);
+ #info{
+    /* background: -webkit-linear-gradient(#060627, #090155); */
     background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
+    /* -webkit-text-fill-color: transparent; */
+} 
 .mesurements{
     text-align: center;
     display: flex;
@@ -105,8 +105,9 @@ h2{
     background-color: #07ad76de;
     padding-left: 10px;
     padding-right: 10px;
-    width: 300px;
+    width: 500px;
     padding: 15px;
+    text-align: left;
 }
 .information{
     white-space: pre-wrap;
@@ -117,7 +118,7 @@ h2{
     justify-content: left;
 }
 #genuine{
-    background: -webkit-linear-gradient(#3b024d, #b80606);
+    background: -webkit-linear-gradient(#3b024d, #ff6004);
     background-clip: text;
     -webkit-text-fill-color: transparent;
     font-size: 25px;
@@ -180,4 +181,10 @@ p{
     .information {
         font-size: 16px; /* Adjust information text size for smaller screens */
     }
+}
+.timeperiod{
+    color: rgb(255, 255, 255);
+}
+.workexperience {
+    color: rgb(22, 17, 83);
 }
