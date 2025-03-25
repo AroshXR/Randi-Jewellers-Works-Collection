@@ -5,6 +5,7 @@ body{
     position: relative;
     font-family: poppins;
     position: sticky;
+    transition: background-image 1s ease-in-out; /* Add transition for background image */
 }
 
 body::before {
@@ -19,8 +20,15 @@ body::before {
     background-position: center;
     background-attachment: fixed;
     background-size: cover;
-     /* Adjust the opacity value as needed */
+    opacity: 0; /* Start with opacity 0 */
+    animation: fadeInBackground 2s forwards; /* Apply fade-in animation */
     z-index: -1; /* Ensure the pseudo-element is behind the content */
+}
+
+@keyframes fadeInBackground {
+    to {
+        opacity: 1; /* End with opacity 1 */
+    }
 }
 
 .mainTopic{
