@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Randi Jewellers | Wasantha Akmeemana</title>
+    <link rel="stylesheet" type="text/css" href="css/styles.css">
+    <link rel="stylesheet" type="text/css" href="css/lightbox.min.css">
+    <script src="javascript/functions.js" defer></script>
+    <script src="javascript/lightbox-plus-jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon_io/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_io/favicon-16x16.png">
+    <link rel="manifest" href="/img/favicon_io/site.webmanifest">    
+</head>
+<body>
+    <nav id="navbar">
+        <div class="logo">Randi Jewellers</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="admin.html" style="color: var(--primary-red);">Admin Login</a></li>
+        </ul>
+        <div class="menu-toggle" id="mobile-menu" aria-label="Toggle navigation menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+
+    <header id="home" class="hero hidden">
+        <div class="hero-content">
+            <h1>Mastery in Every Detail</h1>
+            <p>A legacy of precision and luxury craftsmanship, handcrafting timeless gold and silver masterpieces since 1986.</p>
+            <a href="#gallery" class="btn-primary">Explore the Collection</a>
+        </div>
+    </header>
+
+    <section id="experience" class="hidden section-padding">
+        <div class="container">
+            <h2 class="section-title">A Legacy of Craftsmanship</h2>
+            <div class="experience-grid">
+                <div class="exp-card">
+                    <span class="year">1986 - 1992</span>
+                    <h3>Pattakannu Achari</h3>
+                </div>
+                <div class="exp-card">
+                    <span class="year">1992 - 2000</span>
+                    <h3>The Mouawad</h3>
+                    <p>Swiss Luxury Company (KSA)</p>
+                </div>
+                <div class="exp-card">
+                    <span class="year">2000 - Present</span>
+                    <h3>Nithyakalyani Jewellery</h3>
+                    <p>Wellawatta (Sub-work)</p>
+                </div>
+                <div class="exp-card highlight-card">
+                    <span class="year">Over 35 Years</span>
+                    <h3>Expertise</h3>
+                    <p>Stone Setter, Gold Smith, Silver Smith, Independent Workshop.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="craftsmanship" class="hidden">
+        <div class="banner-container">
+            <div class="banner-item">
+                <img src="img/banners/handmade 2.jpg" alt="Handmade Craftsmanship" class="banner-img" loading="lazy">
+                <div class="banner-overlay">
+                    <h2>Unparalleled Craftsmanship</h2>
+                    <p>Every piece is meticulously handcrafted with absolute precision</p>
+                </div>
+            </div>
+            <div class="banner-item right-align">
+                <img src="img/banners/handmade.png" alt="Handmade Details" class="banner-img img-contain" loading="lazy">
+                <div class="banner-overlay">
+                    <h2>The Details Matter</h2>
+                    <p>Setting stones to shine for a lifetime</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery-section hidden section-padding">
+        <div class="container">
+            <h2 class="section-title">The Collection</h2>
+            <p class="section-subtitle">Exquisite works in gold, silver, and large-scale creations.</p>
+            
+            <div id="dynamic-gallery">
+                <!-- Javascript will inject categories, featured items, and grids here -->
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-container">
+            <div class="footer-grid">
+                <!-- Brand Legacy Column -->
+                <div class="footer-col brand-col">
+                    <h3 class="footer-brand">Randi Jewellers</h3>
+                    <p class="brand-desc">Mastery in handcrafted gold, silver, and elite stone setting since 1986. An enduring legacy of swiss luxury and precision craftsmanship.</p>
+                    <p class="brand-owner">Wasantha Akmeemana</p>
+                </div>
+                <!-- Navigation Column -->
+                <div class="footer-col links-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#experience">Experience</a></li>
+                        <li><a href="#gallery">Gallery</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <li><a href="admin.html" class="admin-link">Admin Login</a></li>
+                    </ul>
+                </div>
+                <!-- Contact Column -->
+                <div class="footer-col contact-col">
+                    <h4>Reach Out</h4>
+                    <ul class="contact-info-list">
+                        <li>
+                            <a href="tel:+94716456232" aria-label="Phone">
+                                <svg class="footer-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+                                <span>+94 71 645 6232</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:wakmeemana821@gmail.com" aria-label="Email">
+                                <svg class="footer-icon" viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                                <span>wakmeemana821@gmail.com</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Social Column -->
+                <div class="footer-col social-col">
+                    <h4>Connect</h4>
+                    <div class="social-buttons">
+                        <a href="https://www.facebook.com/aroshana.sandeep.2025/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook">
+                            <svg class="footer-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"/></svg>
+                            <span>Facebook</span>
+                        </a>
+                        <a href="https://www.instagram.com/aroshtunes_06" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+                            <svg class="footer-icon" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.051.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+                            <span>Instagram</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p class="copyright">&copy; <span id="current-year">2026</span> Randi Jewellers. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Floating Back to Top Button -->
+    <button id="back-to-top" class="back-to-top" aria-label="Back to top">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg>
+    </button>
+</body>
+</html>
