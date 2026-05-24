@@ -119,14 +119,16 @@
         }
         .btn-delete:hover {
             background: #bd2130;
-        }
     </style>
+    <!-- Supabase SDK & Global Config -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="javascript/config.js"></script>
 </head>
 <body>
     <nav id="navbar">
         <div class="logo">RJ Admin</div>
         <ul class="nav-links">
-            <li><a href="/logout">Back to Site</a></li>
+            <li><a href="/" id="backToSiteBtn">Back to Site</a></li>
         </ul>
     </nav>
 

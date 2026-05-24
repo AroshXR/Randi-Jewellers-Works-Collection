@@ -6,15 +6,20 @@
     <title>Randi Jewellers | Wasantha Akmeemana</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
     <link rel="stylesheet" type="text/css" href="css/lightbox.min.css">
+    
+    <!-- Supabase SDK & Global Config -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="javascript/config.js"></script>
+
     <script src="javascript/functions.js" defer></script>
     <script src="javascript/lightbox-plus-jquery.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="/img/favicon_io/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_io/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="/img/favicon_io/site.webmanifest">    
+    <link rel="manifest" href="img/favicon_io/site.webmanifest">    
 </head>
 <body>
     <nav id="navbar">
@@ -77,13 +82,21 @@
                     <p>Every piece is meticulously handcrafted with absolute precision</p>
                 </div>
             </div>
-            <div class="banner-item right-align">
+            <div class="banner-item right-align banner-contain-item">
                 <img src="img/banners/handmade.png" alt="Handmade Details" class="banner-img img-contain" loading="lazy">
                 <div class="banner-overlay">
                     <h2>The Details Matter</h2>
                     <p>Setting stones to shine for a lifetime</p>
                 </div>
             </div>
+            <div class="banner-item banner-full-item">
+                <img src="img/banners/customize banner.png" alt="Custom Masterpieces" class="banner-img" loading="lazy">
+            </div>
+            <div class="banner-text-below hidden">
+                <h2>Your Vision, Our Mastery</h2>
+                <p>Bring your own unique designs to life with our elite stone setting and custom gold craftsmanship</p>
+            </div>
+            
         </div>
     </section>
 

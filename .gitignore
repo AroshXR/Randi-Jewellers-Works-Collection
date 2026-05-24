@@ -14,8 +14,8 @@ yarn-error.log*
 .env.production.local
 
 # Dynamic user uploads
-public/img/uploads/*
-!public/img/uploads/.gitkeep
+data/uploads/*
+!data/uploads/.gitkeep
 
 # System files
 .DS_Store

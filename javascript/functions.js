@@ -69,14 +69,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const galleryContainer = document.getElementById('dynamic-gallery');
     if (!galleryContainer) return;
 
-    fetch('/api/images')
-        .then(res => res.json())
-        .then(images => {
+    supabaseClient
+        .from('images')
+        .select('*')
+        .order('created_at', { ascending: false })
+        .then(({ data: images, error }) => {
+            if (error) {
+                console.error("Supabase fetch error:", error);
+                return;
+            }
+            
             // Group images
-            const goldWorks = images.filter(img => img.category === 'gold' && !img.isFeatured);
-            const silverWorks = images.filter(img => img.category === 'silver' && !img.isFeatured);
-            const largeWorks = images.filter(img => img.category === 'large' && !img.isFeatured);
-            const featuredWorks = images.filter(img => img.isFeatured);
+            const goldWorks = images.filter(img => img.category === 'gold' && !img.isfeatured);
+            const silverWorks = images.filter(img => img.category === 'silver' && !img.isfeatured);
+            const largeWorks = images.filter(img => img.category === 'large' && !img.isfeatured);
+            const featuredWorks = images.filter(img => img.isfeatured);
 
             let html = '';
 
@@ -92,9 +99,16 @@ document.addEventListener("DOMContentLoaded", () => {
                     let imageHtml = `<a href="${feat.url}" data-lightbox="featured-${feat.id}"><img src="${feat.url}" alt="${feat.title}" loading="lazy"></a>`;
                     
                     let imagesClass = 'single-img';
-                    if (feat.extraImages && feat.extraImages.length > 0) {
+                    
+                    // Support dynamic extra images (specifically mapping m2.png as an extra image for the m1.png Golden Cobra)
+                    let extraImagesList = [];
+                    if (feat.url.includes('m1.png')) {
+                        extraImagesList = ['https://edwtsxkpiyqqrtkqqanf.supabase.co/storage/v1/object/public/gallery/m2.png'];
+                    }
+
+                    if (extraImagesList.length > 0) {
                         imagesClass = 'double-img';
-                        feat.extraImages.forEach(extra => {
+                        extraImagesList.forEach(extra => {
                             imageHtml += `<a href="${extra}" data-lightbox="featured-${feat.id}"><img src="${extra}" alt="${feat.title} extra" loading="lazy"></a>`;
                         });
                     }
