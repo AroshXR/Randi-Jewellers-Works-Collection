@@ -46,6 +46,15 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Intersection Observer Helper
     const observeElements = () => {
+        if (!('IntersectionObserver' in window)) {
+            // Fallback: immediately show all hidden items
+            document.querySelectorAll('.hidden').forEach((el) => {
+                el.classList.add('show');
+                el.classList.remove('hidden');
+            });
+            return;
+        }
+
         const observer = new IntersectionObserver((entries, obs) => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
@@ -69,6 +78,21 @@ document.addEventListener("DOMContentLoaded", () => {
     const galleryContainer = document.getElementById('dynamic-gallery');
     if (!galleryContainer) return;
 
+    if (typeof supabaseClient === 'undefined') {
+        console.error("Supabase client is not defined. The library might have failed to load.");
+        galleryContainer.innerHTML = `
+            <div style="text-align: center; padding: 40px; color: var(--primary-red); font-family: var(--font-heading); letter-spacing: 1px;">
+                <p>Failed to connect to the database. Please check your internet connection or ad-blocker and refresh the page.</p>
+            </div>
+        `;
+        const gallerySection = document.getElementById('gallery');
+        if (gallerySection) {
+            gallerySection.classList.add('show');
+            gallerySection.classList.remove('hidden');
+        }
+        return;
+    }
+
     supabaseClient
         .from('images')
         .select('*')
@@ -76,6 +100,16 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(({ data: images, error }) => {
             if (error) {
                 console.error("Supabase fetch error:", error);
+                galleryContainer.innerHTML = `
+                    <div style="text-align: center; padding: 40px; color: var(--primary-red); font-family: var(--font-heading); letter-spacing: 1px;">
+                        <p>Database query error. Please refresh the page.</p>
+                    </div>
+                `;
+                const gallerySection = document.getElementById('gallery');
+                if (gallerySection) {
+                    gallerySection.classList.add('show');
+                    gallerySection.classList.remove('hidden');
+                }
                 return;
             }
             
@@ -163,7 +197,19 @@ document.addEventListener("DOMContentLoaded", () => {
             // Observe the newly added dynamic elements
             observeElements();
         })
-        .catch(err => console.error("Failed to fetch gallery images:", err));
+        .catch(err => {
+            console.error("Failed to fetch gallery images:", err);
+            galleryContainer.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: var(--primary-red); font-family: var(--font-heading); letter-spacing: 1px;">
+                    <p>Failed to load gallery images. Please try again later.</p>
+                </div>
+            `;
+            const gallerySection = document.getElementById('gallery');
+            if (gallerySection) {
+                gallerySection.classList.add('show');
+                gallerySection.classList.remove('hidden');
+            }
+        });
 
     // Floating Back to Top Button
     const backToTopBtn = document.getElementById('back-to-top');

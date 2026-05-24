@@ -942,6 +942,20 @@ footer {
     font-weight: 300;
 }
 
+/* Custom Full-Width Banner Image Scaling without dimming filter */
+.banner-full-item {
+    height: auto !important;
+    min-height: auto !important;
+    margin-top: -80px !important; /* Pull up to eliminate white gap */
+}
+
+.banner-full-item .banner-img {
+    width: 100%;
+    height: auto !important;
+    object-fit: contain !important;
+    filter: none !important;
+}
+
 /* Mobile responsive padding for text below banner */
 @media (max-width: 768px) {
     .banner-text-below {
@@ -963,18 +977,4 @@ footer {
     .banner-full-item {
         margin-top: 30px !important;
     }
-}
-
-/* Custom Full-Width Banner Image Scaling without dimming filter */
-.banner-full-item {
-    height: auto !important;
-    min-height: auto !important;
-    margin-top: -80px !important; /* Pull up to eliminate white gap */
-}
-
-.banner-full-item .banner-img {
-    width: 100%;
-    height: auto !important;
-    object-fit: contain !important;
-    filter: none !important;
 }
