@@ -975,6 +975,6 @@ footer {
     
     /* Give plenty of breathing room on mobile to prevent any overlapping/covering */
     .banner-full-item {
-        margin-top: 30px !important;
+        margin-top: -6px !important;
     }
 }
