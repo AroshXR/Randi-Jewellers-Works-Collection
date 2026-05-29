@@ -74,22 +74,167 @@ document.addEventListener("DOMContentLoaded", () => {
     // Initial observer for hardcoded elements
     observeElements();
 
+    // Fallback images in case Supabase database is unreachable (offline/firewall)
+    const FALLBACK_IMAGES = [
+        // Gold works (g1.jpg to g22.jpg, g23.png)
+        ...Array.from({ length: 22 }, (_, i) => ({
+            id: `g${i + 1}`,
+            url: `img/iloveimg-watermarked/g${i + 1}.jpg`,
+            category: 'gold',
+            title: '',
+            description: '',
+            isfeatured: false
+        })),
+        {
+            id: 'g23',
+            url: 'img/iloveimg-watermarked/g23.png',
+            category: 'gold',
+            title: '',
+            description: '',
+            isfeatured: false
+        },
+        // Silver works (s0.jpg to s10.jpg)
+        ...Array.from({ length: 11 }, (_, i) => ({
+            id: `s${i}`,
+            url: `img/iloveimg-watermarked/s${i}.jpg`,
+            category: 'silver',
+            title: '',
+            description: '',
+            isfeatured: false
+        })),
+        // Large works (m4.jpg to m10.jpg)
+        ...[4, 5, 6, 7, 8, 9, 10].map(num => ({
+            id: `m${num}`,
+            url: `img/iloveimg-watermarked/m${num}.jpg`,
+            category: 'large',
+            title: '',
+            description: '',
+            isfeatured: false
+        })),
+        // Featured works
+        {
+            id: 'featured-1',
+            url: 'img/iloveimg-watermarked/m1.png',
+            category: 'large',
+            title: 'The Golden Cobra',
+            description: 'This Golden Cobra was created for Mayurapathi Kovil Wallawatta associated with Nithyakalyani Jewellery.',
+            isfeatured: true
+        },
+        {
+            id: 'featured-2',
+            url: 'img/iloveimg-watermarked/m3.png',
+            category: 'large',
+            title: 'Royal Gold & Diamond Handbag',
+            description: "This Gold + diamond hand bag was created for one of king brunei's wives associated with Mouwad KSA.",
+            isfeatured: true
+        }
+    ];
+
     // Fetch Images dynamically
     const galleryContainer = document.getElementById('dynamic-gallery');
     if (!galleryContainer) return;
 
-    if (typeof supabaseClient === 'undefined') {
-        console.error("Supabase client is not defined. The library might have failed to load.");
-        galleryContainer.innerHTML = `
-            <div style="text-align: center; padding: 40px; color: var(--primary-red); font-family: var(--font-heading); letter-spacing: 1px;">
-                <p>Failed to connect to the database. Please check your internet connection or ad-blocker and refresh the page.</p>
-            </div>
-        `;
+    // Helper to render the gallery UI
+    const renderGallery = (images) => {
+        // Group images
+        const goldWorks = images.filter(img => img.category === 'gold' && !img.isfeatured);
+        const silverWorks = images.filter(img => img.category === 'silver' && !img.isfeatured);
+        const largeWorks = images.filter(img => img.category === 'large' && !img.isfeatured);
+        const featuredWorks = images.filter(img => img.isfeatured);
+
+        let html = '';
+
+        // Featured Works (if any)
+        if (featuredWorks.length > 0) {
+            html += `
+            <div class="gallery-category">
+                <h3>Featured Works</h3>
+                <div class="featured-works">
+            `;
+            featuredWorks.forEach((feat, index) => {
+                const reverseClass = index % 2 !== 0 ? 'reverse' : '';
+                let imageHtml = `<a href="${feat.url}" data-lightbox="featured-${feat.id}"><img src="${feat.url}" alt="${feat.title}"></a>`;
+                
+                let imagesClass = 'single-img';
+                
+                // Support dynamic extra images (specifically mapping m2.png as an extra image for the m1.png Golden Cobra)
+                let extraImagesList = [];
+                if (feat.url.includes('m1.png')) {
+                    if (feat.url.startsWith('http')) {
+                        extraImagesList = ['https://edwtsxkpiyqqrtkqqanf.supabase.co/storage/v1/object/public/gallery/m2.png'];
+                    } else {
+                        extraImagesList = ['img/iloveimg-watermarked/m2.png'];
+                    }
+                }
+
+                if (extraImagesList.length > 0) {
+                    imagesClass = 'double-img';
+                    extraImagesList.forEach(extra => {
+                        imageHtml += `<a href="${extra}" data-lightbox="featured-${feat.id}"><img src="${extra}" alt="${feat.title} extra"></a>`;
+                    });
+                }
+
+                html += `
+                    <div class="featured-item ${reverseClass} hidden">
+                        <div class="featured-images ${imagesClass}">
+                            ${imageHtml}
+                        </div>
+                        <div class="featured-text">
+                            <h4 class="featured-title">${feat.title}</h4>
+                            <p class="featured-desc">${feat.description}</p>
+                        </div>
+                    </div>
+                `;
+            });
+            html += `</div></div>`;
+        }
+
+        // Helper to build grid
+        const buildCategory = (title, categoryImages, bannerUrl = null) => {
+            if (categoryImages.length === 0) return '';
+            let catHtml = `
+                <div class="gallery-category">
+            `;
+            
+            if (bannerUrl) {
+                catHtml += `
+                    <div class="category-banner hidden">
+                        <img src="${bannerUrl}" alt="${title} Banner">
+                    </div>
+                `;
+            }
+
+            catHtml += `
+                    <h3 class="other-works-title">${title}</h3>
+                    <div class="gallery-grid">
+            `;
+            categoryImages.forEach(img => {
+                catHtml += `<a href="${img.url}" data-lightbox="${img.category}"><img src="${img.url}" alt="${title}"></a>`;
+            });
+            catHtml += `</div></div>`;
+            return catHtml;
+        };
+
+        html += buildCategory('Gold Works', goldWorks, 'img/banners/gold banner.png');
+        html += buildCategory('Silver Works', silverWorks, 'img/banners/silver banner.png');
+        html += buildCategory('Large Scale Works', largeWorks);
+
+        galleryContainer.innerHTML = html;
+
+        // Observe the newly added dynamic elements
+        observeElements();
+
+        // Reveal the gallery section smoothly
         const gallerySection = document.getElementById('gallery');
         if (gallerySection) {
             gallerySection.classList.add('show');
             gallerySection.classList.remove('hidden');
         }
+    };
+
+    if (typeof supabaseClient === 'undefined') {
+        console.warn("Supabase client is not defined. Falling back to local watermarked images.");
+        renderGallery(FALLBACK_IMAGES);
         return;
     }
 
@@ -99,116 +244,15 @@ document.addEventListener("DOMContentLoaded", () => {
         .order('created_at', { ascending: false })
         .then(({ data: images, error }) => {
             if (error) {
-                console.error("Supabase fetch error:", error);
-                galleryContainer.innerHTML = `
-                    <div style="text-align: center; padding: 40px; color: var(--primary-red); font-family: var(--font-heading); letter-spacing: 1px;">
-                        <p>Database query error. Please refresh the page.</p>
-                    </div>
-                `;
-                const gallerySection = document.getElementById('gallery');
-                if (gallerySection) {
-                    gallerySection.classList.add('show');
-                    gallerySection.classList.remove('hidden');
-                }
+                console.error("Supabase fetch error, falling back to local images:", error);
+                renderGallery(FALLBACK_IMAGES);
                 return;
             }
-            
-            // Group images
-            const goldWorks = images.filter(img => img.category === 'gold' && !img.isfeatured);
-            const silverWorks = images.filter(img => img.category === 'silver' && !img.isfeatured);
-            const largeWorks = images.filter(img => img.category === 'large' && !img.isfeatured);
-            const featuredWorks = images.filter(img => img.isfeatured);
-
-            let html = '';
-
-            // Featured Works (if any)
-            if (featuredWorks.length > 0) {
-                html += `
-                <div class="gallery-category">
-                    <h3>Featured Works</h3>
-                    <div class="featured-works">
-                `;
-                featuredWorks.forEach((feat, index) => {
-                    const reverseClass = index % 2 !== 0 ? 'reverse' : '';
-                    let imageHtml = `<a href="${feat.url}" data-lightbox="featured-${feat.id}"><img src="${feat.url}" alt="${feat.title}" loading="lazy"></a>`;
-                    
-                    let imagesClass = 'single-img';
-                    
-                    // Support dynamic extra images (specifically mapping m2.png as an extra image for the m1.png Golden Cobra)
-                    let extraImagesList = [];
-                    if (feat.url.includes('m1.png')) {
-                        extraImagesList = ['https://edwtsxkpiyqqrtkqqanf.supabase.co/storage/v1/object/public/gallery/m2.png'];
-                    }
-
-                    if (extraImagesList.length > 0) {
-                        imagesClass = 'double-img';
-                        extraImagesList.forEach(extra => {
-                            imageHtml += `<a href="${extra}" data-lightbox="featured-${feat.id}"><img src="${extra}" alt="${feat.title} extra" loading="lazy"></a>`;
-                        });
-                    }
-
-                    html += `
-                        <div class="featured-item ${reverseClass} hidden">
-                            <div class="featured-images ${imagesClass}">
-                                ${imageHtml}
-                            </div>
-                            <div class="featured-text">
-                                <h4 class="featured-title">${feat.title}</h4>
-                                <p class="featured-desc">${feat.description}</p>
-                            </div>
-                        </div>
-                    `;
-                });
-                html += `</div></div>`;
-            }
-
-            // Helper to build grid
-            const buildCategory = (title, categoryImages, bannerUrl = null) => {
-                if (categoryImages.length === 0) return '';
-                let catHtml = `
-                    <div class="gallery-category">
-                `;
-                
-                if (bannerUrl) {
-                    catHtml += `
-                        <div class="category-banner hidden">
-                            <img src="${bannerUrl}" alt="${title} Banner" loading="lazy">
-                        </div>
-                    `;
-                }
-
-                catHtml += `
-                        <h3 class="other-works-title">${title}</h3>
-                        <div class="gallery-grid">
-                `;
-                categoryImages.forEach(img => {
-                    catHtml += `<a href="${img.url}" data-lightbox="${img.category}"><img src="${img.url}" alt="${title}" loading="lazy"></a>`;
-                });
-                catHtml += `</div></div>`;
-                return catHtml;
-            };
-
-            html += buildCategory('Gold Works', goldWorks, 'img/banners/gold banner.png');
-            html += buildCategory('Silver Works', silverWorks, 'img/banners/silver banner.png');
-            html += buildCategory('Large Scale Works', largeWorks);
-
-            galleryContainer.innerHTML = html;
-
-            // Observe the newly added dynamic elements
-            observeElements();
+            renderGallery(images);
         })
         .catch(err => {
-            console.error("Failed to fetch gallery images:", err);
-            galleryContainer.innerHTML = `
-                <div style="text-align: center; padding: 40px; color: var(--primary-red); font-family: var(--font-heading); letter-spacing: 1px;">
-                    <p>Failed to load gallery images. Please try again later.</p>
-                </div>
-            `;
-            const gallerySection = document.getElementById('gallery');
-            if (gallerySection) {
-                gallerySection.classList.add('show');
-                gallerySection.classList.remove('hidden');
-            }
+            console.error("Failed to fetch gallery images, falling back to local images:", err);
+            renderGallery(FALLBACK_IMAGES);
         });
 
     // Floating Back to Top Button
