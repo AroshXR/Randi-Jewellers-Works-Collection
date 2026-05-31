@@ -1,3 +1,5 @@
+import { animate, stagger, spring } from 'motion';
+
 document.addEventListener("DOMContentLoaded", () => {
     // Navbar Scroll Effect
     const navbar = document.getElementById('navbar');
@@ -6,11 +8,11 @@ document.addEventListener("DOMContentLoaded", () => {
             const isDesktop = window.innerWidth > 768;
             if (window.scrollY > 50) {
                 if (isDesktop) navbar.style.padding = '15px 80px';
-                navbar.style.background = 'rgba(255, 255, 255, 0.98)';
-                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.05)';
+                navbar.style.background = 'rgba(8, 8, 10, 0.98)';
+                navbar.style.boxShadow = '0 4px 20px rgba(0,0,0,0.4)';
             } else {
                 if (isDesktop) navbar.style.padding = '25px 80px';
-                navbar.style.background = 'rgba(255, 255, 255, 0.95)';
+                navbar.style.background = 'rgba(8, 8, 10, 0.8)';
                 navbar.style.boxShadow = 'none';
             }
         };
@@ -59,12 +61,22 @@ document.addEventListener("DOMContentLoaded", () => {
             entries.forEach((entry) => {
                 if (entry.isIntersecting) {
                     entry.target.classList.add('show');
+                    
+                    // Framer Motion-style physics based spring fade-in!
+                    animate(entry.target, { 
+                        opacity: [0, 1], 
+                        transform: ['translateY(40px)', 'translateY(0px)'] 
+                    }, {
+                        duration: 0.8,
+                        easing: spring({ stiffness: 90, damping: 14 })
+                    });
+                    
                     obs.unobserve(entry.target);
                 }
             });
         }, {
-            threshold: 0.15,
-            rootMargin: "0px 0px -50px 0px"
+            threshold: 0.1,
+            rootMargin: "0px 0px -40px 0px"
         });
 
         const hiddenItems = document.querySelectorAll('.hidden');
@@ -223,6 +235,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Observe the newly added dynamic elements
         observeElements();
+
+        // Stagger pop-in animation for gallery grid items!
+        animate('.gallery-grid a', { 
+            opacity: [0, 1], 
+            scale: [0.88, 1] 
+        }, {
+            delay: stagger(0.02, { start: 0.15 }),
+            duration: 0.6,
+            easing: spring({ stiffness: 110, damping: 14 })
+        });
+
+        // Stagger fade-in slide animation for featured items
+        animate('.featured-item', {
+            opacity: [0, 1],
+            transform: ['translateY(30px)', 'translateY(0px)']
+        }, {
+            delay: stagger(0.12, { start: 0.1 }),
+            duration: 0.8,
+            easing: spring({ stiffness: 90, damping: 15 })
+        });
 
         // Reveal the gallery section smoothly
         const gallerySection = document.getElementById('gallery');

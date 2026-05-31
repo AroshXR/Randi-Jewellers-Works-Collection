@@ -2,25 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <!-- Visual Error Debugger (Prints unhandled script crashes on screen) -->
+    <script>
+        window.addEventListener('error', function(e) {
+            var banner = document.getElementById('visual-debug-banner');
+            if (!banner) {
+                banner = document.createElement('div');
+                banner.id = 'visual-debug-banner';
+                banner.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#d9534f;color:#fff;padding:16px;z-index:999999;font-family:monospace;font-size:12px;line-height:1.5;box-shadow:0 4px 15px rgba(0,0,0,0.5);white-space:pre-wrap;';
+                document.body.appendChild(banner);
+            }
+            banner.textContent += '🚨 ERROR: ' + e.message + '\nFile: ' + e.filename + '\nLine: ' + e.lineno + '\n\n';
+        });
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Randi Jewellers | Wasantha Akmeemana</title>
-    <link rel="stylesheet" type="text/css" href="css/styles.css?v=1.0.3">
-    <link rel="stylesheet" type="text/css" href="css/lightbox.min.css?v=1.0.3">
     
     <!-- Supabase SDK & Global Config -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="javascript/config.js?v=1.0.3"></script>
 
-    <script type="module" src="javascript/functions.js?v=1.0.3" defer></script>
-    <script type="module" src="javascript/customizer3d.js" defer></script>
+    <!-- Three.js & Motion One CDN Deliveries (Permits direct file double-clicking) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/motion@10.16.2/dist/motion.js"></script>
+
+    <script src="javascript/functions.js?v=1.0.3" defer></script>
+    <script src="javascript/customizer3d.js?v=1.0.3" defer></script>
     <script src="javascript/lightbox-plus-jquery.min.js?v=1.0.3"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&family=Cinzel:wght@400;600;700&display=swap" rel="stylesheet">
-    <link rel="apple-touch-icon" sizes="180x180" href="img/favicon_io/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="img/favicon_io/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="img/favicon_io/favicon-16x16.png">
-    <link rel="manifest" href="img/favicon_io/site.webmanifest">    
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon-Bvz2LRk5.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32-BmGVINSa.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16-Dv6skh5w.png">
+    <link rel="manifest" href="/assets/site-BwHFeIBa.webmanifest">    
+  <link rel="stylesheet" crossorigin href="/assets/main-Bja-HW2f.css">
 </head>
 <body>
     <nav id="navbar">
@@ -40,6 +57,12 @@
     </nav>
 
     <header id="home" class="hero hidden">
+        <div class="hero-bg-stripes">
+            <div class="stripe stripe-1"></div>
+            <div class="stripe stripe-2"></div>
+            <div class="stripe stripe-3"></div>
+            <div class="stripe stripe-4"></div>
+        </div>
         <div class="hero-container">
             <div class="hero-content">
                 <h1>Mastery in Every Detail</h1>
@@ -119,17 +142,17 @@
     <section id="craftsmanship" class="hidden">
         <div class="banner-container">
             <div class="banner-item">
-                <img src="img/banners/handmade 2.jpg" alt="Handmade Craftsmanship" class="banner-img" loading="lazy">
+                <img src="/assets/handmade%202-mbqWN9eK.jpg" alt="Handmade Craftsmanship" class="banner-img" loading="lazy">
                 <div class="banner-overlay">
                     <h2>Unparalleled Craftsmanship</h2>
                     <p>Every piece is meticulously handcrafted with absolute precision</p>
                 </div>
             </div>
             <div class="banner-item right-align banner-contain-item">
-                <img src="img/banners/handmade.png" alt="Handmade Details" class="banner-img img-contain" loading="lazy">
+                <img src="/assets/handmade-BHZMjwNu.png" alt="Handmade Details" class="banner-img img-contain" loading="lazy">
             </div>
             <div class="banner-item banner-full-item">
-                <img src="img/banners/customize banner.png" alt="Custom Masterpieces" class="banner-img" loading="lazy">
+                <img src="/assets/customize%20banner-ksDJs3N9.png" alt="Custom Masterpieces" class="banner-img" loading="lazy">
             </div>
             <div class="banner-text-below hidden">
                 <h2>Your Vision, Our Mastery</h2>
