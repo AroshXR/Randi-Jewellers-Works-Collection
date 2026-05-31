@@ -2,19 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <!-- Visual Error Debugger (Prints unhandled script crashes on screen) -->
-    <script>
-        window.addEventListener('error', function(e) {
-            var banner = document.getElementById('visual-debug-banner');
-            if (!banner) {
-                banner = document.createElement('div');
-                banner.id = 'visual-debug-banner';
-                banner.style.cssText = 'position:fixed;top:0;left:0;right:0;background:#d9534f;color:#fff;padding:16px;z-index:999999;font-family:monospace;font-size:12px;line-height:1.5;box-shadow:0 4px 15px rgba(0,0,0,0.5);white-space:pre-wrap;';
-                document.body.appendChild(banner);
-            }
-            banner.textContent += '🚨 ERROR: ' + e.message + '\nFile: ' + e.filename + '\nLine: ' + e.lineno + '\n\n';
-        });
-    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Randi Jewellers | Wasantha Akmeemana</title>
     
@@ -22,13 +9,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="javascript/config.js?v=1.0.3"></script>
 
-    <!-- Three.js & Motion One CDN Deliveries (Permits direct file double-clicking) -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/motion@10.16.2/dist/motion.js"></script>
-
-    <script src="javascript/functions.js?v=1.0.3" defer></script>
-    <script src="javascript/customizer3d.js?v=1.0.3" defer></script>
     <script src="javascript/lightbox-plus-jquery.min.js?v=1.0.3"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -37,7 +17,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32-BmGVINSa.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16-Dv6skh5w.png">
     <link rel="manifest" href="/assets/site-BwHFeIBa.webmanifest">    
-  <link rel="stylesheet" crossorigin href="/assets/main-Bja-HW2f.css">
+  <script type="module" crossorigin src="/assets/main-C6YknVIs.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/main-iEswe4xv.css">
 </head>
 <body>
     <nav id="navbar">
@@ -57,12 +38,6 @@
     </nav>
 
     <header id="home" class="hero hidden">
-        <div class="hero-bg-stripes">
-            <div class="stripe stripe-1"></div>
-            <div class="stripe stripe-2"></div>
-            <div class="stripe stripe-3"></div>
-            <div class="stripe stripe-4"></div>
-        </div>
         <div class="hero-container">
             <div class="hero-content">
                 <h1>Mastery in Every Detail</h1>

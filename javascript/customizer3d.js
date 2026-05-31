@@ -437,7 +437,13 @@ class JewelryCustomizer {
     }
 }
 
-// Initialise the customizer once the window is loaded
-window.addEventListener('DOMContentLoaded', () => {
+// Initialise the customizer with robust readyState execution check
+const initCustomizer = () => {
     new JewelryCustomizer();
-});
+};
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initCustomizer);
+} else {
+    initCustomizer();
+}

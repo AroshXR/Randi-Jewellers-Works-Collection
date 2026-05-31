@@ -1,6 +1,6 @@
 import { animate, stagger, spring } from 'motion';
 
-document.addEventListener("DOMContentLoaded", () => {
+const init = () => {
     // Navbar Scroll Effect
     const navbar = document.getElementById('navbar');
     if (navbar) {
@@ -305,4 +305,10 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
     }
-});
+};
+
+if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", init);
+} else {
+    init();
+}
